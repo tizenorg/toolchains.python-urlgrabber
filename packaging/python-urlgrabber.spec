@@ -9,6 +9,7 @@ License:    LGPLv2+
 BuildArch:  noarch
 URL:        http://urlgrabber.baseurl.org/
 Source0:    http://urlgrabber.baseurl.org/download/urlgrabber-%{version}.tar.gz
+Source1001: packaging/python-urlgrabber.manifest 
 Patch0:     urlgrabber-HEAD.patch
 Patch1:     urlgrabber-libproxy-httponly.patch
 Requires:   python-pycurl
@@ -34,6 +35,7 @@ authentication, proxies and more.
 %patch1 -p1
 
 %build
+cp %{SOURCE1001} .
 
 CFLAGS="$RPM_OPT_FLAGS" %{__python} setup.py build
 
@@ -52,6 +54,7 @@ rm -rf %{buildroot}
 
 
 %files
+%manifest python-urlgrabber.manifest
 %defattr(-,root,root,-)
 %doc ChangeLog LICENSE README TODO
 %{python_sitelib}/urlgrabber*
