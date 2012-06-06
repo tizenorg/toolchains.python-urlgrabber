@@ -8,7 +8,7 @@ Group:      Development/Libraries
 License:    LGPLv2+
 BuildArch:  noarch
 URL:        http://urlgrabber.baseurl.org/
-Source0:    http://urlgrabber.baseurl.org/download/urlgrabber-%{version}.tar.gz
+Source0:    %{name}-%{version}.tar.gz
 Source1001: packaging/python-urlgrabber.manifest 
 Patch0:     urlgrabber-HEAD.patch
 Patch1:     urlgrabber-libproxy-httponly.patch
@@ -30,7 +30,7 @@ authentication, proxies and more.
 
 
 %prep
-%setup -q -n urlgrabber-%{version}
+%setup -q
 %patch0 -p1
 %patch1 -p1
 
