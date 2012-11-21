@@ -11,10 +11,9 @@ URL:        http://urlgrabber.baseurl.org/
 Source0:    %{name}-%{version}.tar.gz
 Source1001: packaging/python-urlgrabber.manifest 
 Patch0:     urlgrabber-HEAD.patch
-Patch1:     urlgrabber-libproxy-httponly.patch
 Requires:   python-pycurl
-Requires:   m2crypto
-Requires:   libproxy-python
+#Requires:   m2crypto
+#Requires:   libproxy-python
 BuildRequires:  python-devel
 BuildRequires:  python-pycurl
 Provides:   urlgrabber = %{version}-%{release}
@@ -32,7 +31,6 @@ authentication, proxies and more.
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p1
 
 %build
 cp %{SOURCE1001} .
