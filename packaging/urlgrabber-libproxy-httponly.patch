@@ -1,0 +1,83 @@
+From 2dc04b08536ad0a17147fc91eacb3dc8e87a755b Mon Sep 17 00:00:00 2001
+Message-Id: <2dc04b08536ad0a17147fc91eacb3dc8e87a755b.1299826695.git.yan.i.li@intel.com>
+From: Yan Li <yan.i.li@intel.com>
+Date: Fri, 11 Mar 2011 14:49:28 +0800
+Subject: [PATCH] libproxy support
+
+Based on David Woodhouse <dwmw2@infradead.org>'s work.
+
+Signed-off-by: Yan Li <yan.i.li@intel.com>
+---
+ urlgrabber/grabber.py |   35 ++++++++++++++++++++++++++++++++---
+ 1 files changed, 32 insertions(+), 3 deletions(-)
+
+diff --git a/urlgrabber/grabber.py b/urlgrabber/grabber.py
+index e090e90..a4e3e04 100644
+--- a/urlgrabber/grabber.py
++++ b/urlgrabber/grabber.py
+@@ -143,8 +143,17 @@ GENERAL ARGUMENTS (kwargs)
+     note that proxy authentication information may be provided using
+     normal URL constructs:
+       proxies={ 'http' : 'http://user:host@foo:3128' }
+-    Lastly, if proxies is None, the default environment settings will
+-    be used.
++    If proxies is None, the proxy_factory (described below) will be used.
++
++  proxy_factory = libproxy.ProxyFactory()
++
++    a libproxy ProxyFactory object. This is initialised to a default
++    global ProxyFactory if libproxy is installed, but can be
++    overridden to None to disable libproxy, or indeed to anything with
++    a getProxies() method that takes a URL and returns a list of
++    potential proxies. The proxy_factory is is only used if the
++    proxies dictionary is not set. If both proxies and proxy_factory
++    are None, the default environment variable will be used.
+ 
+   prefix = None
+ 
+@@ -439,6 +448,12 @@ try:
+ except:
+     __version__ = '???'
+ 
++try:
++    import libproxy
++    _grabber_proxy_factory = libproxy.ProxyFactory()
++except:
++    _grabber_proxy_factory = None
++
+ ########################################################################
+ # functions for debugging output.  These functions are here because they
+ # are also part of the module initialization.
+@@ -802,6 +817,7 @@ class URLGrabberOptions:
+         self.user_agent = 'urlgrabber/%s' % __version__
+         self.keepalive = 1
+         self.proxies = None
++        self.proxy_factory = _grabber_proxy_factory
+         self.reget = None
+         self.failure_callback = None
+         self.interrupt_callback = None
+@@ -1202,7 +1218,20 @@ class PyCurlFileObject():
+                     else:
+                         if proxy == '_none_': proxy = ""
+                         self.curl_obj.setopt(pycurl.PROXY, proxy)
+-            
++        elif opts.proxy_factory:
++            try:
++                proxies = opts.proxy_factory.getProxies(self.url);
++                for proxy in proxies:
++                    if proxy.startswith('http://'):
++                        if DEBUG: DEBUG.info('using proxy "%s" for url %s' % \
++                                                 (proxy, self.url))
++                        self.curl_obj.setopt(pycurl.PROXY, proxy)
++                        break
++            except:
++                # libproxy may fail, and in that case we just fall
++                # back to next proxy supplier (environment variables)
++                opts.proxy_factory = None
++
+         # FIXME username/password/auth settings
+ 
+         #posts - simple - expects the fields as they are
+-- 
+1.7.4.1
+
