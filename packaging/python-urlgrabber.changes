@@ -1,0 +1,101 @@
+* Tue Sep 06 2011 William Douglas <william.douglas@intel.com> - 3.9.1
+- Fix missing prefix
+
+* Fri Mar 11 2011 Yan Li <yan.i.li@intel.com> - 3.9.1
+- When libproxy fails, fall back to environment variables (BMC#13757)
+
+* Sat Jan 30 2010 Jian-feng Ding <jian-feng.ding@intel.com> 3.9.1
+- Upgrade to 3.9.1 and enable spectacle
+  Dropped all old patches except David's libproxy one
+  Integreted the updated version of libproxy patch, found in:
+    https://bugzilla.redhat.com/show_bug.cgi?id=542224
+
+* Sat Dec 26 2009 David Woodhouse <David.Woodhouse@intel.com> 3.1.0
+- Use libproxy to find proxy information
+
+* Sun Apr 12 2009 Peter Zhu<peter.j.zhu@intel.com> 3.1.0
+- Add dependency to m2crypto so that it can works with https connection fixed bug #1289
+
+
+* Fri Feb 20 2009 Zhu Yanhai<yanhai.zhu@intel.com> 3.1.0
+- Correct SOURCE
+- Version update to 3.1.0
+
+* Mon Apr  7 2008 James Antill <james@fedoraproject.org> 3.0.0-6
+- Fix the ftp byterange port problem:
+- Resolves: bug#419241
+- Fixup the progress UI:
+-   add function for total progress
+-   add total progress percentagee current download line
+-   add rate to current download line
+-   use dead space when finished downloading
+-   don't confuse download rate on regets.
+
+* Sat Mar 15 2008 Robert Scheck <robert@fedoraproject.org> 3.0.0-5
+- Make sure, that *.egg-info is catched up during build
+
+* Mon Dec  3 2007 Jeremy Katz <katzj@redhat.com> - 3.0.0-4
+- Ensure fds are closed on exceptions (markmc, #404211)
+
+* Wed Oct 10 2007 Jeremy Katz <katzj@redhat.com> - 3.0.0-3
+- fix type checking of strings to also include unicode strings; fixes 
+  regets from yum (#235618)
+
+* Mon Aug 27 2007 Jeremy Katz <katzj@redhat.com> - 3.0.0-2
+- fixes for package review (#226347)
+
+* Thu May 31 2007 Jeremy Katz <katzj@redhat.com> - 3.0.0-1
+- update to 3.0.0
+
+* Wed Dec  6 2006 Jeremy Katz <katzj@redhat.com> - 2.9.9-5
+- rebuild for python 2.5
+
+* Wed Dec  6 2006 Jeremy Katz <katzj@redhat.com> - 2.9.9-4
+- fix keepalive (#218268) 
+
+* Sat Nov 11 2006 Florian La Roche <laroche@redhat.com>
+- add version/release to "Provides: urlgrabber"
+
+* Mon Jul 17 2006 James Bowes <jbowes@redhat.com> - 2.9.9-2
+- Add support for byte ranges and keepalive over HTTPS
+
+* Wed Jul 12 2006 Jesse Keating <jkeating@redhat.com> - 2.9.9-1.1
+- rebuild
+
+* Tue May 16 2006 Jeremy Katz <katzj@redhat.com> - 2.9.9-1
+- update to 2.9.9
+
+* Tue Mar 14 2006 Jeremy Katz <katzj@redhat.com> - 2.9.8-2
+- catch read errors so they trigger the failure callback.  helps catch bad cds
+
+* Wed Feb 22 2006 Jeremy Katz <katzj@redhat.com> - 2.9.8-1
+- update to new version fixing progress bars in yum on regets
+
+* Fri Dec 09 2005 Jesse Keating <jkeating@redhat.com>
+- rebuilt
+
+* Wed Sep 21 2005 Jeremy Katz <katzj@redhat.com> - 2.9.6-4
+- don't use --record and list files by hand so that we don't miss 
+  directories (#158480)
+
+* Wed Sep 14 2005 Jeremy Katz <katzj@redhat.com> - 2.9.6-3
+- add directory to file list (#168261)
+
+* Fri Jun 03 2005 Phil Knirsch <pknirsch@redhat.com> 2.9.6-2
+- Fixed the reget method to actually work correctly (skip completely transfered
+  files, etc)
+
+* Tue Mar  8 2005 Jeremy Katz <katzj@redhat.com> - 2.9.6-1
+- update to 2.9.6
+
+* Mon Mar  7 2005 Jeremy Katz <katzj@redhat.com> - 2.9.5-1
+- import into dist
+- make the description less of a book
+
+* Mon Mar  7 2005 Seth Vidal <skvidal@phy.duke.edu> 2.9.5-0
+- 2.9.5
+
+* Thu Feb 24 2005 Seth Vidal <skvidal@phy.duke.edu> 2.9.3-0
+- first package for fc3
+- named python-urlgrabber for naming guideline compliance
+
