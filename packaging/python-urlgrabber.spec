@@ -16,6 +16,9 @@ Requires:   python-pycurl
 #Requires:   libproxy-python
 BuildRequires:  python-devel
 BuildRequires:  python-pycurl
+%ifarch %arm
+%no_speedpython
+%endif
 Provides:   urlgrabber = %{version}-%{release}
 
 BuildRoot:  %{_tmppath}/%{name}-%{version}-build
